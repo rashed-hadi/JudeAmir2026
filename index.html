@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Luxurious+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -118,7 +118,7 @@
       }
 
       .couple-names {
-        font-family: "Great Vibes", cursive;
+        font-family: "Luxurious Script", cursive;
         font-size: 68px;
         line-height: 1.05;
         color: var(--gold-dark);
@@ -345,7 +345,7 @@
       }
 
       .success-title {
-        font-family: "Great Vibes", cursive;
+        font-family: "Luxurious Script", cursive;
         font-size: 52px;
         color: var(--gold-dark);
         margin-bottom: 14px;
@@ -436,19 +436,19 @@
                     type="radio"
                     id="attendingYes"
                     name="attending"
-                    value="Joyfully Accept"
+                    value="Accept"
                     required
                   />
-                  <label for="attendingYes">Joyfully Accept</label>
+                  <label for="attendingYes">YES</label>
                 </div>
                 <div class="radio-option">
                   <input
                     type="radio"
                     id="attendingNo"
                     name="attending"
-                    value="Regretfully Decline"
+                    value="Decline"
                   />
-                  <label for="attendingNo">Regretfully Decline</label>
+                  <label for="attendingNo">NO</label>
                 </div>
               </div>
             </div>
@@ -540,7 +540,6 @@
 
       attendingNo.addEventListener("change", () => {
         plusOneSection.classList.remove("visible");
-        notComingMsg.classList.add("visible");
         plusOneNameSection.classList.remove("visible");
         plusOneName.required = false;
       });
@@ -574,6 +573,13 @@
           });
 
           if (response.ok) {
+            const isDeclined = attendingNo.checked;
+            const successText = successScreen.querySelector(".success-text");
+            if (isDeclined) {
+              successText.innerHTML = "You will be dearly missed.<br />Thank you for letting us know.";
+            } else {
+              successText.innerHTML = "Your RSVP has been received.<br />We can't wait to celebrate with you.";
+            }
             formContent.style.opacity = "0";
             setTimeout(() => {
               formContent.style.display = "none";
